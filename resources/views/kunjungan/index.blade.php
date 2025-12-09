@@ -1,5 +1,6 @@
 @extends('layout.main')
 @section('content')
+
     
 <div class="body-wrapper">
     <div class="container-fluid">
@@ -21,6 +22,10 @@
                             <a href="" class="btn btn-light mt-2">
                                 <i class="ti ti-filter"></i> Filter
                             </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="table-responsive mt-3">
                                 <table
                                     id="zero_config"

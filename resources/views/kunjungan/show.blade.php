@@ -1,5 +1,18 @@
 @extends('layout.main')
 @section('content')
+
+<style>
+    .form-izin {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #000;
+    }
+    .ttd {
+        font-size: 12px;
+        margin-top: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #000;
+    }
+</style>
     
 <div class="body-wrapper">
     <div class="container-fluid">
@@ -39,12 +52,84 @@
                                 Mobil kantor
                             </div>
                         </div>
+                        <div class="mb-4 row">
+                            <label class="form-label col-sm-3 fw-medium">Tanggal</label
+                            >
+                            <div class="col-sm-9">
+                                Rabu, 03 Desember 2025
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9">
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#approve" class="btn btn-danger"><i class="ti ti-check me-1"></i>Approve</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="px-4 py-3 border-bottom">
+                        <h4 class="card-title mb-0">Preview</h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="text-center">Menunggu approval</span><br><br>
+                        <div class="table-responsive">
+                            <table width="100%" cellpadding="5" class="form-izin">
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <h4><u>FORM IZIN KUNJUNGAN</u></h4>
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" width="150">Nama</td>
+                                    <td valign="top" width="10">:</td>
+                                    <td>Rifqi Rifaldi</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Departemen</td>
+                                    <td valign="top">:</td>
+                                    <td>IT Development</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Dealer</td>
+                                    <td valign="top">:</td>
+                                    <td>MPS Pandeglang</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Tujuan</td>
+                                    <td valign="top">:</td>
+                                    <td>Monitoring dealer</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Alamat</td>
+                                    <td valign="top">:</td>
+                                    <td>Jl. Raya Pandeglang - Serang, Karangtanjung, Pandeglang, Banten</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Inventaris</td>
+                                    <td valign="top">:</td>
+                                    <td>Mobil avanza</td>
+                                </tr>
+                            </table>
+                            <table align="right" width="200" class="ttd">
+                                <tr>
+                                    <td>
+                                        Serang, 03 Desember 2025
+                                        <br>
+                                        Head Deapartment
+                                        <br><br><br><br>
+                                        <u><b>Prabowo Subianto</b></u>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="" class="btn btn-dark"><i class="ti ti-download"></i> Download PDF</a>
                     </div>
                 </div>
             </div>
