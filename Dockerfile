@@ -36,6 +36,5 @@ RUN composer install --no-dev --optimize-autoloader
 EXPOSE 8000
 
 # Run Laravel
-CMD php artisan key:generate --force && \
-    php artisan migrate --force && \
+CMD php artisan migrate --force || true && \
     php artisan serve --host=0.0.0.0 --port=${PORT}
