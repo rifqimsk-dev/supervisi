@@ -21,163 +21,139 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="px-4 py-3 border-bottom">
-                        <h4 class="card-title mb-0">Kunjungan <span class="badge bg-warning float-end"><i class="ti ti-clock me-1"></i>Waiting</span></h4>
+                        <h4 class="card-title mb-0">
+                            Kunjungan 
+                            @php
+                                $color = match($kunjungan->status) {
+                                    'waiting'   => 'warning',
+                                    'approved'  => 'success',
+                                    default     => 'slate'
+                                };
+
+                                $view_temuan = match(Auth::user()->role) {
+                                    'kadep'   => 'd-none',
+                                    'user'  => '',
+                                    default     => ''
+                                };
+
+                                $disable_temuan = match(Auth::user()->role) {
+                                    'kadep'   => 'readonly',
+                                    'user'  => '',
+                                    default     => ''
+                                };
+                            @endphp
+                            <span class="badge bg-{{ $color }} float-end">
+                                {{ $kunjungan->status }}
+                            </span>
+                        </h4>
                     </div>
                     <div class="card-body">
                         <div class="mb-4 row">
                             <label class="form-label col-sm-3 fw-medium">Nama</label>
                             <div class="col-sm-9">
-                                <span class="fw-semibold">Rifaldi</span>
-                                <span class="d-block fs-2">IT Development</span>
-                                <span class="d-block fs-2">Programmer</span>
+                                <span class="fw-semibold">{{ $kunjungan->user->name }}</span>
+                                <span class="d-block fs-2">{{ $kunjungan->user->departemen->name }}</span>
+                                <span class="d-block fs-2">{{ $kunjungan->user->jabatan }}</span>
                             </div>
                         </div>
                         <div class="mb-4 row">
                             <label class="form-label col-sm-3 fw-medium">Dealer</label>
                             <div class="col-sm-9">
-                                <span class="fw-semibold">MPS Pandeglang</span>
-                                <span class="d-block fs-2">Jl. Raya Pandeglang - Serang, Karangtanjung, Pandeglang, Banten</span>
+                                <span class="fw-semibold">{{ $kunjungan->dealer->dealer_name }}</span>
+                                <span class="d-block fs-2">{{ $kunjungan->alamat }}</span>
                             </div>
                         </div>
                         <div class="mb-4 row">
                             <label class="form-label col-sm-3 fw-medium">Tujuan</label>
                             <div class="col-sm-9">
-                                <span>Monitoring Dealer</span>
+                                <span>{{ $kunjungan->tujuan }}</span>
                             </div>
                         </div>
                         <div class="mb-4 row">
                             <label class="form-label col-sm-3 fw-medium">Inventaris yg digunakan</label
                             >
                             <div class="col-sm-9">
-                                Mobil kantor
+                                {{ $kunjungan->inventaris->name }}
                             </div>
                         </div>
                         <div class="mb-4 row">
                             <label class="form-label col-sm-3 fw-medium">Tanggal</label
                             >
                             <div class="col-sm-9">
-                                Rabu, 03 Desember 2025
+                                {{ \Carbon\Carbon::parse($kunjungan->tanggal)->locale('id')->translatedFormat('l, d F Y') }}
                             </div>
                         </div>
+
+                        @if ($kunjungan->status == "approved" && Auth::user()->role == "user")
+                            <a href="{{ route('kunjungan.download', encrypt($kunjungan->id)) }}" class="btn btn-sm btn-danger" target="_blank"><i class="ti ti-download"></i> Download</a>
+                        @endif
+                        
+                        @if (Auth::user()->role == "kadep")
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9">
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#approve" class="btn btn-danger"><i class="ti ti-check me-1"></i>Approve</button>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="px-4 py-3 border-bottom">
-                        <h4 class="card-title mb-0">Preview</h4>
-                    </div>
-                    <div class="card-body">
-                        <span class="text-center">Menunggu approval</span><br><br>
-                        <div class="table-responsive">
-                            <table width="100%" cellpadding="5" class="form-izin">
-                                <tr>
-                                    <td colspan="3" align="center">
-                                        <h4><u>FORM IZIN KUNJUNGAN</u></h4>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top" width="150">Nama</td>
-                                    <td valign="top" width="10">:</td>
-                                    <td>Rifqi Rifaldi</td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">Departemen</td>
-                                    <td valign="top">:</td>
-                                    <td>IT Development</td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">Dealer</td>
-                                    <td valign="top">:</td>
-                                    <td>MPS Pandeglang</td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">Tujuan</td>
-                                    <td valign="top">:</td>
-                                    <td>Monitoring dealer</td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">Alamat</td>
-                                    <td valign="top">:</td>
-                                    <td>Jl. Raya Pandeglang - Serang, Karangtanjung, Pandeglang, Banten</td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">Inventaris</td>
-                                    <td valign="top">:</td>
-                                    <td>Mobil avanza</td>
-                                </tr>
-                            </table>
-                            <table align="right" width="200" class="ttd">
-                                <tr>
-                                    <td>
-                                        Serang, 03 Desember 2025
-                                        <br>
-                                        Head Deapartment
-                                        <br><br><br><br>
-                                        <u><b>Prabowo Subianto</b></u>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="" class="btn btn-dark"><i class="ti ti-download"></i> Download PDF</a>
-                    </div>
-                </div>
-            </div>
-
+            @if ($kunjungan->status == "approved")
             <div class="col-lg-12">
                 <div class="card">
                     <div class="px-4 py-3 border-bottom">
                         <h4 class="card-title mb-0">Isi Temuan Dealer</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="mb-4 row">
-                            <label class="form-label col-sm-2 fw-medium">People</label>
-                            <div class="col-sm-6">
-                                <textarea name="" id="people" class="form-control" style="border: 1px solid #d0d0d0" cols="30" rows="10"></textarea>
+
+                    <form action="{{ route('temuan.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="kunjungan_id" value="{{ $kunjungan->id }}">
+                        <div class="card-body">
+                            <div class="mb-4 row">
+                                <label class="form-label col-sm-2 fw-medium">People</label>
+                                <div class="col-sm-6">
+                                    <textarea name="people" id="people" class="form-control" {{ $disable_temuan }} style="border: 1px solid #d0d0d0" cols="30" rows="10">{{ old('people', $temuan->people ?? '') }}</textarea>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="file" name="file_people" id="" class="form-control mb-2 {{ $view_temuan }} form-control-file">
+                                    <img src="{{ asset('storage/'.$temuan->file_people) }}" class="rounded-2" width="100%">
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <input type="file" name="" id="" class="form-control form-control-file">
+                            <div class="mb-4 row">
+                                <label class="form-label col-sm-2 fw-medium">Premises</label>
+                                <div class="col-sm-6">
+                                    <textarea name="premises" id="premises" class="form-control" {{ $disable_temuan }} style="border: 1px solid #d0d0d0" cols="30" rows="10">{{ old('premises', $temuan->premises ?? '') }}</textarea>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="file" name="file_premises" id="" class="form-control mb-2 {{ $view_temuan }} form-control-file">
+                                    <img src="{{ asset('storage/'.$temuan->file_premises) }}" class="rounded-2" width="100%">
+                                </div>
+                            </div>
+                            <div class="mb-4 row">
+                                <label class="form-label col-sm-2 fw-medium">Process</label>
+                                <div class="col-sm-6">
+                                    <textarea name="process" id="process" class="form-control" {{ $disable_temuan }} style="border: 1px solid #d0d0d0" cols="30" rows="10">{{ old('process', $temuan->process ?? '') }}</textarea>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="file" name="file_process" id="" class="form-control mb-2 {{ $view_temuan }} form-control-file">
+                                    <img src="{{ asset('storage/'.$temuan->file_process) }}" class="rounded-2" width="100%">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-10">
+                                    <button class="btn btn-danger {{ $view_temuan }}"><i class="ti ti-check me-1"></i>Simpan</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-4 row">
-                            <label class="form-label col-sm-2 fw-medium">Premises</label>
-                            <div class="col-sm-6">
-                                <textarea name="" id="premises" class="form-control" style="border: 1px solid #d0d0d0" cols="30" rows="10"></textarea>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="file" name="" id="" class="form-control form-control-file">
-                            </div>
-                        </div>
-                        <div class="mb-4 row">
-                            <label class="form-label col-sm-2 fw-medium">Process</label>
-                            <div class="col-sm-6">
-                                <textarea name="" id="process" class="form-control" style="border: 1px solid #d0d0d0" cols="30" rows="10"></textarea>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="file" name="" id="" class="form-control form-control-file">
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-10">
-                                <button class="btn btn-danger"><i class="ti ti-check me-1"></i>Simpan</button>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-
+            @endif
+            
         </div>
     </div>
 </div>
@@ -191,19 +167,15 @@
                 </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="POST" class="floating-labels">
+            <form action="{{ route('kunjungan.approve', encrypt($kunjungan->id)) }}" method="POST" class="floating-labels">
                 <div class="modal-body">
                     @csrf
+                    @method('PATCH')
                     <div class="form-group mb-4">
-                        <input
-                            type="text"
-                            name="catatatan"
-                            class="form-control @error('catatatan') is-invalid @enderror"
-                            id="catatatan"
-                        />
+                        <input type="text" name="catatan_status" class="form-control @error('catatan_status') is-invalid @enderror" id="catatan_status"/>
                         <span class="bar"></span>
-                        <label for="catatan">Masukkan catatan</label>
-                        @error('catatan')
+                        <label for="catatan_status">Masukkan status</label>
+                        @error('catatan_status')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>

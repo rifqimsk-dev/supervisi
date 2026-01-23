@@ -18,8 +18,8 @@
                 <!-- ---------------------------------- -->
                 <!-- Dashboard -->
                 <!-- ---------------------------------- -->
-                <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}" id="get-url">
+                <li class="sidebar-item" id="get-url">
+                    <a class="sidebar-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">
                         <iconify-icon icon="solar:screencast-2-linear" class="aside-icon"></iconify-icon>
                         <span class="hide-menu">Dashboard</span>
                     </a>
@@ -28,6 +28,7 @@
                 <!-- ---------------------------------- -->
                 <!-- Data Master -->
                 <!-- ---------------------------------- -->
+                @if (Auth::user()->role == "admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <iconify-icon icon="solar:home-angle-linear" class="aside-icon"></iconify-icon>
@@ -35,37 +36,47 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link sublink ">
+                            <a href="{{ route('departemen.index') }}" class="sidebar-link sublink ">
                                 <span class="hide-menu ms-3">Departemen</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link sublink ">
-                                <span class="hide-menu ms-3">Karyawan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link sublink ">
+                            <a href="{{ route('inventaris.index') }}" class="sidebar-link sublink ">
                                 <span class="hide-menu ms-3">Inventaris</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link sublink ">
+                            <a href="{{ route('dealer.index') }}" class="sidebar-link sublink ">
                                 <span class="hide-menu ms-3">Dealer</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+                @endif
 
                 <!-- ---------------------------------- -->
                 <!-- Kunjungan -->
                 <!-- ---------------------------------- -->
+                @if (Auth::user()->role == "kadep" || Auth::user()->role == "user")
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('kunjungan*') ? 'active' : '' }}" href="{{ route('kunjungan.index') }}">
                         <iconify-icon icon="solar:buildings-2-linear" class="aside-icon"></iconify-icon>
                         <span class="hide-menu">Kunjungan</span>
                     </a>
                 </li>
+                @endif
+
+                <!-- ---------------------------------- -->
+                <!-- Manajemen User -->
+                <!-- ---------------------------------- -->
+                @if (Auth::user()->role == "admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->is('user*') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                        <iconify-icon icon="solar:user-linear" class="aside-icon"></iconify-icon>
+                        <span class="hide-menu">Manajemen User</span>
+                    </a>
+                </li>
+                @endif
             </ul>
         </nav>
 

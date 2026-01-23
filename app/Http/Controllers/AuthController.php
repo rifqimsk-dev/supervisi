@@ -101,7 +101,7 @@ class AuthController extends Controller
         session()->forget('login_role');
 
         // Redirect sesuai role
-        if ($role === 'admin' || $role === 'user') {
+        if ($role === 'admin' || $role === 'kadep' || $role === 'user') {
             return redirect('/');
         }
 

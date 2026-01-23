@@ -37,48 +37,10 @@
 
         <!-- Row -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body p-9">
-                        <div class="hstack gap-9">
-                            <div class="round-56 rounded-circle text-white d-flex align-items-center justify-content-center text-bg-danger">
-                                <i class="ti ti-trending-up fs-6"></i>
-                            </div>
-                            <div class="align-self-center">
-                                <h3 class="mb-1 fs-6">8</h3>
-                                <span class="text-muted">Kunjungan Hari Ini</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body p-9">
-                        <div class="hstack gap-9">
-                            <div class="round-56 rounded-circle text-white d-flex align-items-center justify-content-center text-bg-warning">
-                                <i class="ti ti-trending-up fs-6"></i>
-                            </div>
-                            <div class="align-self-center">
-                                <h3 class="mb-1 fs-6">10</h3>
-                                <span class="text-muted">Kunjungan Bulan Ini</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body p-9">
-                        <div class="hstack gap-9">
-                            <div class="round-56 rounded-circle text-white d-flex align-items-center justify-content-center text-bg-info">
-                                <i class="ti ti-trending-up fs-6"></i>
-                            </div>
-                            <div class="align-self-center">
-                                <h3 class="mb-1 fs-6">18</h3>
-                                <span class="text-muted">Total Kunjungan</span>
-                            </div>
-                        </div>
+                        Selamat datang
                     </div>
                 </div>
             </div>

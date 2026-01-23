@@ -1,35 +1,18 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    dir="ltr"
-    data-bs-theme="light"
-    data-color-theme="Aqua_Theme"
-    data-layout="vertical"
->
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Aqua_Theme" data-layout="vertical">
     <head>
         <!-- Required meta tags -->
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <!-- Favicon icon-->
-        <link
-            rel="shortcut icon"
-            type="image/png"
-            href="{{ secure_asset('assets/images/logos/logo.png') }}"
-        />
-
+        <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/logo.png') }}"/>
         <!-- Core Css -->
-        <link
-            rel="stylesheet"
-            href="{{ secure_asset('assets/css/styles.css?v=1.4') }}"
-        />
+        <link rel="stylesheet" href="{{ asset('assets/css/styles.css?v=1.4') }}"/>
         <!-- Datatable -->
-        <link
-            rel="stylesheet"
-            href="{{ secure_asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}"
-        />
-
+        <link rel="stylesheet" href="{{ asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}"/>
+        {{-- Select2 --}}
+        <link rel="stylesheet" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}">
         <title>{{ $title }}</title>
     </head>
 
@@ -46,27 +29,31 @@
         </div>
         <div class="dark-transparent sidebartoggler"></div>
 
-        <script src="{{ secure_asset('assets/js/vendor.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
         <!-- Import Js Files -->
-        <script src="{{ secure_asset('assets/js/breadcrumb/breadcrumbChart.js') }}"></script>
-        <script src="{{ secure_asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/theme/app.init.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/theme/theme.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/theme/app.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/theme/sidebarmenu.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/theme/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/js/breadcrumb/breadcrumbChart.js') }}"></script>
+        <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/js/theme/app.init.js') }}"></script>
+        <script src="{{ asset('assets/js/theme/theme.js') }}"></script>
+        <script src="{{ asset('assets/js/theme/app.min.js') }}"></script>
+        <script src="{{ asset('assets/js/theme/sidebarmenu.js') }}"></script>
+        <script src="{{ asset('assets/js/theme/feather.min.js') }}"></script>
         <!-- solar icons -->
         <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-        <script src="{{ secure_asset('assets/js/dashboards/dashboard1.js') }}"></script>
+        <script src="{{ asset('assets/js/dashboards/dashboard1.js') }}"></script>
         <!-- Datatable -->
-        <script src="{{ secure_asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/datatable/datatable-basic.init.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/datatable/datatable-basic.init.js') }}"></script>
         {{-- Form Step --}}
-        <script src="{{ secure_asset('assets/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-        <script src="{{ secure_asset('assets/js/forms/form-wizard.js') }}"></script>
+        <script src="{{ asset('assets/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('assets/js/forms/form-wizard.js') }}"></script>
+        {{-- Select2 --}}
+        <script src="{{ asset('assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/select2/dist/js/select2.min.js') }}"></script>
+        <script src="{{ asset('assets/js/forms/select2.init.js') }}"></script>
         <script>
             $(".floating-labels .form-control")
                 .on("focus blur", function (e) {

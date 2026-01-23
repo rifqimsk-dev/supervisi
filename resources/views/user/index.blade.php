@@ -12,15 +12,10 @@
                     <!-- start Zero Configuration -->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Kunjungan <span class="badge text-bg-dark"><i class="me-2 ti ti-calendar"></i>Desember</span></h4>
-                            @if (Auth::user()->role == "user")
-                            <a href="{{ route('kunjungan.create') }}" class="btn btn-outline-danger mt-2">
-                                <i class="ti ti-plus"></i> Kunjungan
+                            <h4 class="card-title">Manajemen User</h4>
+                            <a href="{{ route('user.create') }}" class="btn btn-outline-danger mt-2">
+                                <i class="ti ti-plus"></i> User Baru
                             </a>
-                            <a href="" class="btn btn-light mt-2">
-                                <i class="ti ti-database-export"></i> Export
-                            </a>
-                            @endif
                             <a href="" class="btn btn-light mt-2">
                                 <i class="ti ti-filter"></i> Filter
                             </a>
@@ -29,39 +24,45 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive mt-3">
-                                <table id="zero_config" class="table text-nowrap align-middle">
+                                <table
+                                    id="zero_config"
+                                    class="table text-nowrap align-middle"
+                                >
                                     <thead>
                                         <tr>
-                                            <th>Tanggal</th>
-                                            <th>Dealer</th>
-                                            <th>Tujuan</th>
+                                            <th>Nama</th>
+                                            <th>Departemen</th>
+                                            <th>Jabatan</th>
+                                            <th>Role</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($result as $row)
+                                        @foreach($user as $row)
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::parse($row->tanggal)->format('d M Y') }}</td>
                                             <td>
-                                                <span class="fw-semibold"><i class="ti ti-building"></i> {{ $row->dealer->dealer_name }}</span>
-                                                <span class="d-block fs-2">{{ substr($row->alamat,0,50) }}...</span>
+                                                <span class="fw-semibold">{{ $row->name }}</span>
+                                                <span class="d-block fs-2">{{ $row->email }}</span>
                                             </td>
-                                            <td>{{ $row->tujuan }}</td>
+                                            <td>{{ $row->departemen->name }}</td>
+                                            <td>{{ $row->jabatan }}</td>
+                                            <td>{{ $row->role }}</td>
                                             <td>
-                                                @php
-                                                    $color = match($row->status) {
-                                                        'waiting'   => 'warning',
-                                                        'approved'  => 'success',
-                                                        default     => 'slate'
-                                                    };
-                                                @endphp
-                                                <span class="badge bg-{{ $color }}-subtle text-{{ $color }} fs-2">{{ $row->status }}</span>
+                                                @if($row->status === 1)
+                                                <span class="badge bg-success-subtle text-success fs-2">
+                                                    <i class="ti ti-user"></i> Active
+                                                </span>
+                                                @else
+                                                <span class="badge bg-danger-subtle text-danger fs-2">
+                                                    <i class="ti ti-user"></i> Suspend
+                                                </span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <ul class="list-unstyled mb-0 d-flex align-items-center">
                                                     <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Detail">
-                                                        <a class="text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5" href="{{ route('kunjungan.show', encrypt($row->id)) }}">
+                                                        <a class="text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5" href="{{ route('user.edit', encrypt($row->id)) }}">
                                                             <i class="ti ti-search"></i>
                                                         </a>
                                                     </li>
